@@ -1,12 +1,10 @@
 import LogIn from "../guest/Login"
 import Register from "./Register"
-import {LOGIN, REGISTER} from "../../utils/windowsSwitch"
-import {changeCurrentWindow} from "../../app/currentWindowSlice"
-import {useState} from "react";
+import { LOGIN, REGISTER } from "../../utils/windowsSwitch"
+import { useState } from "react"
 
 
 const Guest = () => {
-
     const [currentWindow, setCurrentWindow] = useState<string>(LOGIN)
 
 

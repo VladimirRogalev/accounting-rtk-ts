@@ -1,8 +1,7 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import  {useState} from "react"
-import {registerFetch} from "../../features/actions/accountAction";
-import {useAppDispatch} from "../../app/hooks";
-import type {UserRequest} from "../../utils/interfaces";
+import { useState } from "react"
+import { registerFetch } from "../../features/actions/accountAction"
+import { useAppDispatch } from "../../app/hooks"
+import type { UserRequest } from "../../utils/interfaces"
 
 const Register = () => {
     //TODO create style, inputs and button

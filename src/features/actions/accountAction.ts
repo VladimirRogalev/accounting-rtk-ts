@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import { BASE_URL } from "../../utils/constants"
-import type { UserRequest, UserResponse } from "../../utils/interfaces"
+import type { UserRequest } from "../../utils/interfaces"
 
 export const registerFetch = createAsyncThunk(
   "account/registerFetch",
@@ -13,22 +13,30 @@ export const registerFetch = createAsyncThunk(
           "Content-Type": "application/json"
         }
       })
+      if (!response.ok) {
+        throw new Error(response.status + ", status")
+      }
       const data = await response.json()
-      return /*data.ok ? */data.body /*: new Error('Response not OK')*/
+      return data
     } catch (e) {
-      return console.log(e)
+      console.log(e)
+      throw e
     }
 
 
   })
-
 export const loginFetch = createAsyncThunk(
   "account/loginFetch",
-  async (thunkAPI) => {
+  async (token: string, thunkAPI) => {
     const response = await fetch(`${BASE_URL}/login`, {
-      method: "POST"
+      method: "POST",
+      headers: {
+        "Authorization": token
+      }
     })
-    const data = await response.json()
-    return data
+    if (!response.ok) {
+      throw new Error(`Status: ${response.status}`)
+    }
+    return await response.json()
   }
 )
