@@ -1,16 +1,17 @@
-import type {Action, ThunkAction} from "@reduxjs/toolkit"
-import {combineSlices, configureStore} from "@reduxjs/toolkit"
-import userSlices from "../features/slices/userSlices";
+import type { Action, ThunkAction } from "@reduxjs/toolkit"
+import { combineSlices, configureStore } from "@reduxjs/toolkit"
+import userSlices from "../features/slices/userSlices"
+import tokenSlices from "../features/slices/tokenSlices"
 
 
-const rootReducer = combineSlices(userSlices)
+const rootReducer = combineSlices(userSlices, tokenSlices)
 export type RootState = ReturnType<typeof rootReducer>
 
 
 export const makeStore = (preloadedState?: Partial<RootState>) => {
   const store = configureStore({
     reducer: rootReducer,
-    preloadedState,
+    preloadedState
   })
   return store
 }

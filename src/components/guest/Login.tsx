@@ -2,6 +2,7 @@ import  { useState } from "react"
 import { useAppDispatch } from "../../app/hooks"
 import { encryptedToken } from "../../utils/constants"
 import { loginFetch } from "../../features/actions/accountAction"
+import { putToken } from "../../features/slices/tokenSlices"
 
 
 const LogIn = () => {
@@ -13,6 +14,7 @@ const LogIn = () => {
   const handleClickLogin = () => {
     const token = encryptedToken(username, password)
     dispatch(loginFetch(token))
+    dispatch(putToken(token))
     setPassword("")
     setUsername("")
   }
@@ -40,20 +42,23 @@ const LogIn = () => {
           <div className="form-floating mb-1">
             <input type="password" className="password form-control border-2" name="password" id="password"
                    defaultValue=""
-                   placeholder="Password" required value={password}
-                   onChange={(e) => setPassword(e.target.value.trim())} />
+                   placeholder="Password"
+                   required
+                   onChange={(e) => setPassword(e.target.value.trim())}
+                   value={password} />
             <label htmlFor="password" className="pass form-label">Password</label>
           </div>
         </div>
 
         <div className="col-12">
           <div className="d-grid">
-            <button className="btn bsb-btn-3xl btn-primary py-3" type="submit" onClick={handleClickLogin}>Log in now</button>
+            <button className="btn bsb-btn-3xl btn-primary py-3" type="submit" onClick={handleClickLogin}>Log in now
+            </button>
           </div>
         </div>
         <div className="col-12">
           <div className="d-grid">
-            <button className="btn bsb-btn-3xl btn-primary py-3" type="submit" >Clear</button>
+            <button className="btn bsb-btn-3xl btn-primary py-3" type="submit">Clear</button>
           </div>
         </div>
       </div>

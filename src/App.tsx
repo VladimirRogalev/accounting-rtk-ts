@@ -14,7 +14,7 @@ const App = () => {
           <div className="row justify-content-center">
             <div className="col-12 col-md-9 col-lg-7 col-xl-6 col-xxl-5">
               <div className="card border-0 shadow-sm rounded-4">
-                {user.login ? <User />:<Guest />}
+                {user ? <User />:<Guest />}
               </div>
             </div>
           </div>
