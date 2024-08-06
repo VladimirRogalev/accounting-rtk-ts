@@ -1,15 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { loginFetch, registerFetch } from "../actions/accountAction"
+import { changeUserFetch, loginFetch, registerFetch } from "../actions/accountAction"
 import type { User } from "../../utils/interfaces"
 
 
 const UserSlice = createSlice({
   name: "user",
   initialState: {
-    data: {} as User,
+    data: null as null | User,
     status: ""
   },
-  reducers: {},
+  reducers: {
+    deleteUser (state) {
+      state.data= null
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(registerFetch.pending, (state) => {
@@ -28,13 +32,24 @@ const UserSlice = createSlice({
       .addCase(loginFetch.fulfilled, (state, action) => {
         state.status = ""
         state.data = action.payload
-
       })
       .addCase(loginFetch.rejected, (state, action) => {
+        state.status = "Error!" + action.error.message
+      })
+      .addCase(changeUserFetch.pending, (state) => {
+        state.status = "Pending..."
+      })
+      .addCase(changeUserFetch.fulfilled, (state, action) => {
+        state.status = ""
+        state.data = action.payload
+      })
+      .addCase(changeUserFetch.rejected, (state, action) => {
         state.status = "Error!" + action.error.message
       })
 
   }
 })
+
+export const {deleteUser} = UserSlice.actions
 
 export default UserSlice
