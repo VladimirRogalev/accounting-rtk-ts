@@ -1,12 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit"
-import type { Login } from "../../utils/interfaces"
+
 import { loginFetch } from "../actions/accountAction"
+import  type { User } from "../../utils/interfaces"
+
 
 
 const LoginSlices = createSlice({
   name: 'login',
   initialState: {
-    login: {} as Login,
+    login: {} as User,
     status:''
   },
   reducers: {},
